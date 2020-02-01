@@ -31,7 +31,7 @@ def getMethod2():
     res=jsonify(opj.SensorJson)
     return res
     
-@app.route('/TestApp',methods=["POST"])  
+@app.route('/TestPostApp',methods=["POST"])  
 def postMethod2():   
     opj = ActS()
     opj.Activate()
