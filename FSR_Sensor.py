@@ -1,7 +1,6 @@
 import RPi.GPIO as GPIO
 import time
 
-
 class FSR:
     Left_Pin = 16
     Right_Pin = 12
