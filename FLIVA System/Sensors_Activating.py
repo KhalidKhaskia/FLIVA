@@ -1,9 +1,9 @@
 import RPi.GPIO as GPIO
 import time
-from FSR_Sensor import FSR
-from PIR_Sensor import PIR_Sensor as PIR
-from MCSD_Sensor import MCSD
-from DHT11_Sensor import DHT_Sensor as DHT
+from Sensors.FSR_Sensor import FSR
+from Sensors.PIR_Sensor import PIR_Sensor as PIR
+from Sensors.MCSD_Sensor import MCSD
+from Sensors.DHT11_Sensor import DHT_Sensor as DHT
 
 
 class Activate_Sensors:
