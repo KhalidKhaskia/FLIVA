@@ -10,8 +10,11 @@ import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -21,6 +24,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.fliva.R;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,11 +46,31 @@ public class MainActivity extends AppCompatActivity
 
     private NotificationManager notif;
     private Notification notify;
+
+    Button logout,flivaScan;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        flivaScan = findViewById(R.id.btn_fliva_scan);
+        logout= findViewById(R.id.btn_logout);
+
+        logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                logout(v);
+            }
+        });
+
+        flivaScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(getApplicationContext(),ActivateScaning.class));
+            }
+        });
+
+        /*
         mList = findViewById(R.id.main_list);
         sensorsList = new ArrayList<>();
         adapter = new SensorAdapter(getApplicationContext(),sensorsList);
@@ -71,10 +95,18 @@ public class MainActivity extends AppCompatActivity
                 .setContentText("someone stuck in your car")
                 .setSmallIcon(R.drawable.ic_launcher_foreground).build();
         notify.flags |= Notification.FLAG_AUTO_CANCEL;
-
+        */
         //getData();
         //useData();
     }
+
+    public void logout(View view)
+    {
+        FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getApplicationContext(),Login.class));
+        finish();
+    }
+
 
     private void getData()  {
         final ProgressDialog progressDialog = new ProgressDialog(this);
