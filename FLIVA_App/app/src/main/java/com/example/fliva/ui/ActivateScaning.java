@@ -1,4 +1,4 @@
-package com.example.fliva;
+package com.example.fliva.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -6,6 +6,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+
+import com.example.fliva.R;
+import com.example.fliva.adapters.SensorAdapter;
+import com.example.fliva.models.SensorPi;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +34,7 @@ public class ActivateScaning extends AppCompatActivity {
         sensorsList = new ArrayList<>();
         adapter = new SensorAdapter(getApplicationContext(),sensorsList);
 
-        //test
+        //todo:test
         SensorPi s =new SensorPi("khalid",26,"this is my app");
         sensorsList.add(s);
 

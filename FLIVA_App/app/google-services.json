@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "617932601134",
+    "firebase_url": "https://fliva-db.firebaseio.com",
+    "project_id": "fliva-db",
+    "storage_bucket": "fliva-db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617932601134:android:4292c313fbf373674d2cbf",
+        "android_client_info": {
+          "package_name": "com.example.fliva"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "617932601134-2pfbfqh2gqg9sralg9ne2hi186svrpe1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fliva",
+            "certificate_hash": "d117f7554cd84e3995b9fdca5bebaf243cd91214"
+          }
+        },
+        {
+          "client_id": "617932601134-k1q0i86gf6dmb12epun3p2cmv6e285nq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBmkpWBq1lDqX0XVxYIVozwCMxyE7gb5Wk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "617932601134-k1q0i86gf6dmb12epun3p2cmv6e285nq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

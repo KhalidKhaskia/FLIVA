@@ -1,4 +1,4 @@
-package com.example.fliva;
+package com.example.fliva.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -9,7 +9,6 @@ import java.util.List;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,12 +23,14 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.fliva.R;
+import com.example.fliva.controllers.Login;
+import com.example.fliva.controllers.NetworkController;
+import com.example.fliva.models.SensorPi;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.util.ArrayList;
 
 
 public class MainActivity extends AppCompatActivity
@@ -103,7 +104,7 @@ public class MainActivity extends AppCompatActivity
     public void logout(View view)
     {
         FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(getApplicationContext(),Login.class));
+        startActivity(new Intent(getApplicationContext(), Login.class));
         finish();
     }
 

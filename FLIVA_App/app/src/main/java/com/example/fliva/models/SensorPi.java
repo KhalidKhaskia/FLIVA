@@ -1,4 +1,4 @@
-package com.example.fliva;
+package com.example.fliva.models;
 
 import androidx.annotation.NonNull;
 
@@ -9,9 +9,7 @@ public class SensorPi
     private String Note;
 
     public SensorPi()
-    {
-
-    }
+    { }
     public SensorPi(String Name, int Value, String Note)
     {
         this.setName(Name);

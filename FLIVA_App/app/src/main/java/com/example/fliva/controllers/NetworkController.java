@@ -1,4 +1,4 @@
-package com.example.fliva;
+package com.example.fliva.controllers;
 
 import android.app.Application;
 import android.content.Context;
