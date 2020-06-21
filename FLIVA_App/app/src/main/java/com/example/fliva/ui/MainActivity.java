@@ -1,6 +1,7 @@
 package com.example.fliva.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -27,49 +28,91 @@ import com.example.fliva.controllers.Login;
 import com.example.fliva.controllers.NetworkController;
 import com.example.fliva.models.SensorPi;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements View.OnClickListener
 {
     private String url = "http://192.168.68.109:5000/ActivateSensors";
     private String tag="MainActivity";
-
+    private CardView listSensorsCard,scanCard,profileCard,sensorsManangeCard,logoutCard;
+    DatabaseReference users;
+    FirebaseDatabase db;
     private RecyclerView mList;
-
     private LinearLayoutManager linearLayoutManager;
     private DividerItemDecoration dividerItemDecoration;
     private List<SensorPi> sensorsList;
     private RecyclerView.Adapter adapter;
-
     private NotificationManager notif;
     private Notification notify;
-
     Button logout,flivaScan;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        flivaScan = findViewById(R.id.btn_fliva_scan);
-        logout= findViewById(R.id.btn_logout);
 
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                logout(v);
-            }
-        });
+        users = db.getInstance().getReference("Users");
 
-        flivaScan.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(getApplicationContext(),ActivateScaning.class));
-            }
-        });
+        //defining Cards
+        listSensorsCard = (CardView) findViewById(R.id.listSensorsCardId);
+        scanCard = (CardView) findViewById(R.id.scanCardId);
+        profileCard = (CardView) findViewById(R.id.profileCardId);
+        sensorsManangeCard = (CardView) findViewById(R.id.sensorsManangeCardId);
+        logoutCard = (CardView) findViewById(R.id.logoutCardId);
+
+        // Add Click listener to the cards
+        listSensorsCard.setOnClickListener(this);
+        scanCard.setOnClickListener(this);
+        profileCard.setOnClickListener(this);
+        sensorsManangeCard.setOnClickListener(this);
+        logoutCard.setOnClickListener(this);
+
+    }
+    @Override
+    public void onClick(View v)
+    {
+        Intent intent ;
+
+        switch(v.getId())
+        {
+            case R.id.listSensorsCardId : intent = new Intent(this,SensorsLogHis.class);startActivity(intent); break;
+            case R.id.scanCardId : intent = new Intent(this,ActivateScaning.class);startActivity(intent); break;
+            case R.id.profileCardId : intent = new Intent(this,Profile.class);startActivity(intent); break;
+            case R.id.sensorsManangeCardId : intent = new Intent(this,SensorManagement.class);startActivity(intent); break;
+            case R.id.logoutCardId : logout(v);; break;
+            default:break;
+        }
+    }
+    public void logout(View view)
+    {
+        //FirebaseAuth.getInstance().signOut();
+        startActivity(new Intent(getApplicationContext(), Login.class));
+        finish();
+    }
+
+//        flivaScan = findViewById(R.id.btn_fliva_scan);
+//        logout= findViewById(R.id.btn_logout);
+//
+//        logout.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                logout(v);
+//            }
+//        });
+//
+//        flivaScan.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(getApplicationContext(),ActivateScaning.class));
+//            }
+//        });
 
         /*
         mList = findViewById(R.id.main_list);
@@ -99,14 +142,8 @@ public class MainActivity extends AppCompatActivity
         */
         //getData();
         //useData();
-    }
 
-    public void logout(View view)
-    {
-        FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(getApplicationContext(), Login.class));
-        finish();
-    }
+
 
 
     private void getData()  {
@@ -159,7 +196,6 @@ public class MainActivity extends AppCompatActivity
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(jsonArrayRequest);
     }
-
 
     public interface DataCallback {
         void onSuccess(JSONArray result);
