@@ -15,16 +15,17 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".ui.SensorManagement"></activity>
         <activity android:name=".ui.Profile" />
-        <activity android:name=".ui.SensorsLogHis" />
+        <activity android:name=".controllers.Login" />
         <activity android:name=".ui.ActivateScaning" />
         <activity android:name=".controllers.Registration" />
-        <activity android:name=".controllers.Login">
+        <activity android:name=".ui.SensorsLogHis">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <!--SensorsLogHis controllers.Login -->
         <activity android:name=".ui.MainActivity" />
     </application>
 
