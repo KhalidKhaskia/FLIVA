@@ -4,59 +4,64 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.fliva.R;
 import com.example.fliva.models.SensorPi;
+import com.example.fliva.models.SensorsLog;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-public class SensorAdapter extends RecyclerView.Adapter<SensorAdapter.ViewHolder>
+public class SensorAdapter extends BaseAdapter
 {
 
     private Context context;
-    private List<SensorPi> list;
+    private ArrayList<SensorPi> list;
 
-    public SensorAdapter(Context context, List<SensorPi> list) {
+    public SensorAdapter(Context context, ArrayList<SensorPi> list) {
         this.context = context;
         this.list = list;
     }
 
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
+    public int getCount()
     {
-        View v = LayoutInflater.from(context).inflate(R.layout.single_item, parent, false);
-        return new ViewHolder(v);
+        return this.list.size();
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
-        SensorPi sensor = list.get(position);
-
-        holder.textName.setText(sensor.getName());
-        holder.textValue.setText(String.valueOf(sensor.getValue()));
-        holder.textNote.setText(sensor.getNote());
-
+    public Object getItem(int position)
+    {
+        return list.get(position);
     }
 
     @Override
-    public int getItemCount() {
-        return list.size();
+    public long getItemId(int position)
+    {
+        return position;
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public TextView textName, textValue, textNote;
+    @Override
+    public View getView(int position, View convertView, ViewGroup parent)
+    {
+        SensorPi sP = (SensorPi) getItem(position);
+        LayoutInflater layoutInflater = LayoutInflater.from(this.context);
+        View itemView = layoutInflater.inflate(R.layout.single_item, null);
 
-        public ViewHolder(View itemView)
-        {
-            super(itemView);
+        TextView textName = itemView.findViewById(R.id.main_name);
+        TextView textValue= itemView.findViewById(R.id.main_value);
+        TextView textNote = itemView.findViewById(R.id.main_note);
 
-            textName = itemView.findViewById(R.id.main_name);
-            textValue = itemView.findViewById(R.id.main_value);
-            textNote = itemView.findViewById(R.id.main_note);
-        }
+        textName.setText(sP.getName());
+        textValue.setText(sP.getValue()+"");
+        textNote.setText(sP.getNote());
+
+        return itemView;
     }
 
 }

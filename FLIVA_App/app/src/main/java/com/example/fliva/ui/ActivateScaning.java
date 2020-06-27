@@ -6,10 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.ListView;
 
 import com.example.fliva.R;
 import com.example.fliva.adapters.SensorAdapter;
+import com.example.fliva.adapters.SensorsLogHisAdapter;
 import com.example.fliva.models.SensorPi;
+import com.example.fliva.models.SensorsLog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,33 +22,33 @@ public class ActivateScaning extends AppCompatActivity {
     private String url = "http://192.168.68.109:5000/ActivateSensors";
     private String tag="MainActivity";
 
-    private RecyclerView mList;
-
-    private LinearLayoutManager linearLayoutManager;
-    private DividerItemDecoration dividerItemDecoration;
-    private List<SensorPi> sensorsList;
-    private RecyclerView.Adapter adapter;
+    private ListView sPList;
+    //private LinearLayoutManager linearLayoutManager;
+    //private DividerItemDecoration dividerItemDecoration;
+    private ArrayList<SensorPi> sensorsList;
+    private SensorAdapter adp;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activate_scaning);
-        mList = findViewById(R.id.main_list);
+        sPList = (ListView) findViewById(R.id.scanning_list);
         sensorsList = new ArrayList<>();
-        adapter = new SensorAdapter(getApplicationContext(),sensorsList);
 
-        //todo:test
+
+        //
         SensorPi s =new SensorPi("khalid",26,"this is my app");
         sensorsList.add(s);
 
-        linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        dividerItemDecoration = new DividerItemDecoration(mList.getContext(), linearLayoutManager.getOrientation());
+//        linearLayoutManager = new LinearLayoutManager(this);
+//        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+//        dividerItemDecoration = new DividerItemDecoration(mList.getContext(), linearLayoutManager.getOrientation());
 
-        mList.setHasFixedSize(true);
-        mList.setLayoutManager(linearLayoutManager);
-        mList.addItemDecoration(dividerItemDecoration);
-        mList.setAdapter(adapter);
+        //mList.setLayoutManager(linearLayoutManager);
+        //mList.addItemDecoration(dividerItemDecoration);
+        adp = new SensorAdapter(getApplicationContext(),sensorsList);
+        sPList.setAdapter(adp);
     }
 
 
