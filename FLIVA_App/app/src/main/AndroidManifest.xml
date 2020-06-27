@@ -13,7 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ui.ActivateScaning"></activity>
+        <activity android:name=".ui.SensorManagement"></activity>
+        <activity android:name=".ui.Profile" />
+        <activity android:name=".ui.SensorsLogHis" />
+        <activity android:name=".ui.ActivateScaning" />
         <activity android:name=".controllers.Registration" />
         <activity android:name=".controllers.Login">
             <intent-filter>
@@ -22,7 +25,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.MainActivity"></activity>
+        <activity android:name=".ui.MainActivity" />
     </application>
 
 </manifest>

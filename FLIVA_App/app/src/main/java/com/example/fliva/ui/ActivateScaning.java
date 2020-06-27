@@ -47,4 +47,7 @@ public class ActivateScaning extends AppCompatActivity {
         mList.addItemDecoration(dividerItemDecoration);
         mList.setAdapter(adapter);
     }
+
+
+
 }
