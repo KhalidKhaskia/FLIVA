@@ -33,14 +33,14 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:background="@drawable/cerclebackgroundpurple"
-                    android:src="@drawable/ic_attach_money_black_24dp"
+                    android:src="@drawable/ic_attach_his_24dp"
                     android:padding="10dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:layout_marginTop="10dp"
-                    android:text="Banking"/>
+                    android:text="History"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -50,7 +50,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Check your bank activities"
+                    android:text="Check Your Sensors Logs"
                     android:padding="5dp"
                     android:textColor="@android:color/darker_gray"/>
 
@@ -72,14 +72,14 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:background="@drawable/cerclebackgroundpink"
-                    android:src="@drawable/ic_lightbulb_outline_black_24dp"
+                    android:src="@drawable/ic_activate_sensors_black_24dp"
                     android:padding="10dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:layout_marginTop="10dp"
-                    android:text="Ideas"/>
+                    android:text="Power On"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -89,7 +89,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Check your bank activities"
+                    android:text="Manualy Activate The System"
                     android:padding="5dp"
                     android:textColor="@android:color/darker_gray"/>
 
@@ -119,14 +119,14 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:background="@drawable/cerclebackgroundgreen"
-                    android:src="@drawable/ic_control_point_black_24dp"
+                    android:src="@drawable/ic_control_edit_profile_24dp"
                     android:padding="10dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:layout_marginTop="10dp"
-                    android:text="Add"/>
+                    android:text="Profile"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
@@ -136,7 +136,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="Check your bank activities"
+                    android:text="Edit Profile"
                     android:padding="5dp"
                     android:textColor="@android:color/darker_gray"/>
 
@@ -161,13 +161,13 @@
                     android:layout_height="64dp"
                     android:background="@drawable/cerclebackgroundyello"
                     android:padding="10dp"
-                    android:src="@drawable/ic_attach_file_black_24dp" />
+                    android:src="@drawable/ic_attach_sensor_settings_24dp" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="Links"
+                    android:text="Settings"
                     android:textStyle="bold" />
 
                 <View
@@ -181,7 +181,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:padding="5dp"
-                    android:text="Check your bank activities"
+                    android:text="Sensor Settings"
                     android:textColor="@android:color/darker_gray" />
 
             </LinearLayout>
@@ -210,27 +210,19 @@
                     android:layout_width="64dp"
                     android:layout_height="64dp"
                     android:background="@drawable/cerclebackgroundpurple"
-                    android:src="@drawable/ic_wifi_black_24dp"
+                    android:src="@drawable/ic_logout_24dp"
                     android:padding="10dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textStyle="bold"
                     android:layout_marginTop="10dp"
-                    android:text="Add"/>
+                    android:text="Log Out"/>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/lightgray"
                     android:layout_margin="10dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="Check your bank activities"
-                    android:padding="5dp"
-                    android:textColor="@android:color/darker_gray"/>
-
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

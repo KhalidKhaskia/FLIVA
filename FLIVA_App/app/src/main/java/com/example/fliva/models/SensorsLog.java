@@ -9,12 +9,13 @@ public class SensorsLog
 	private String temperature;
 	private String humidity;
 	private String sound;
+	private String location;
 
 	public SensorsLog()
 	{
 	}
 
-	public SensorsLog(String date, String movment, String seats, String openDoors, String temperature, String humidity, String sound)
+	public SensorsLog(String date, String movment, String seats, String openDoors, String temperature, String humidity, String sound, String location)
 	{
 		this.date = date;
 		this.movment = movment;
@@ -23,6 +24,7 @@ public class SensorsLog
 		this.temperature = temperature;
 		this.humidity = humidity;
 		this.sound = sound;
+		this.location=location;
 	}
 
 	public String getDate()
@@ -93,5 +95,15 @@ public class SensorsLog
 	public void setSound(String sound)
 	{
 		this.sound = sound;
+	}
+
+	public String getLocation()
+	{
+		return location;
+	}
+
+	public void setLocation(String location)
+	{
+		this.location = location;
 	}
 }

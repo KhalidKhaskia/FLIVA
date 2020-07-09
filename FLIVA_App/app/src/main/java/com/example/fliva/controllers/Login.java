@@ -16,6 +16,7 @@ import com.example.fliva.models.User;
 import com.example.fliva.ui.MainActivity;
 import com.example.fliva.R;
 
+import com.example.fliva.ui.Profile;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,7 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 
 
 public class Login extends AppCompatActivity {
-
+    public static String TMPLCS;
     EditText SI_license,SI_password;
     Button btn_sginIn;
     TextView tv_SignUp;
@@ -102,6 +103,9 @@ public class Login extends AppCompatActivity {
                     SI_license.setError("License Number Is Not Regesterd");
                     //Toast.makeText(Login.this,"License Does Not Reg",Toast.LENGTH_SHORT).show();
                 }
+                TMPLCS=license;
+                Intent intent = new Intent(getApplicationContext(), Profile.class);
+                intent.putExtra("License",license);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error)

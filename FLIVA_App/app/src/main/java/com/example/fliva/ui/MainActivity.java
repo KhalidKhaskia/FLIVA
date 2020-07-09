@@ -1,5 +1,6 @@
 package com.example.fliva.ui;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.DividerItemDecoration;
@@ -15,6 +16,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -27,9 +29,13 @@ import com.example.fliva.R;
 import com.example.fliva.controllers.Login;
 import com.example.fliva.controllers.NetworkController;
 import com.example.fliva.models.SensorPi;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -74,6 +80,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sensorsManangeCard.setOnClickListener(this);
         logoutCard.setOnClickListener(this);
 
+        //**********//
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                        // Get new Instance ID token
+                        String token = task.getResult().getToken();
+
+                        // Log and toast
+                        Log.d("Token", token);
+                        Toast.makeText(MainActivity.this, token.toString(), Toast.LENGTH_LONG).show();
+                    }
+                });
     }
     @Override
     public void onClick(View v)
