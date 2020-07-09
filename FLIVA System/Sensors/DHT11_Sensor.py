@@ -26,11 +26,10 @@ class DHT_Sensor:
             result=[0,0]
             return result
         #time.sleep(3)
-"""
+
 def main():
-    dht=DHT_Sensor(18)
+    dht=DHT_Sensor()
     print(dht.Calculate_DHT())
 #
 if (__name__ == "__main__"):
     main()
-"""

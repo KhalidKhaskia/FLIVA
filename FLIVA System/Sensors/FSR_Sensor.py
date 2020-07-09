@@ -14,18 +14,23 @@ class FSR:
         self.fsr_L=0
         self.fsr_R=0
         self.fsr_C=0
-        
+    """
+    def __init__(self,driver):
+        GPIO.setmode(GPIO.BCM)
+        GPIO.setup(self.Left_Pin,GPIO.IN)
+        self.fsr_L=driver
+    """    
     def check_wight(self):
         prev_input = 0
         count = 0
         try:
-            while(count < 1):
+            while(count < 10):
                 #take a reading
                 self.fsr_L = GPIO.input(self.Left_Pin)
                 self.fsr_R = GPIO.input(self.Right_Pin)
                 self.fsr_C = GPIO.input(self.Center_Pin)
                 #if the last reading was low and this one high,    alert us
-                print(self.fsr_L,"\n",self.fsr_R,"\n",self.fsr_C,"\n")
+                print(self.fsr_L,"\n",self.fsr_C,"\n",self.fsr_R,"\n")
                 if (prev_input > 0):
                     print("Under Pressure")
                 #update previous input
@@ -40,7 +45,7 @@ class FSR:
                     return prev_input
                 #slight pause
                 count+=1
-                time.sleep(1)
+                time.sleep(2)
             #return prev_input
         #
         except KeyboardInterrupt:
@@ -48,14 +53,38 @@ class FSR:
             pass
         #
         finally:
-            GPIO.cleanup()
+            #GPIO.cleanup()
             return 0
 
-"""
+    def check_driver_chair(self):
+        prev_input = 0
+        count = 0
+        try:
+            while(count < 2):
+                #take a reading
+                self.fsr_L = GPIO.input(self.Left_Pin)
+                #if the last reading was low and this one high,    alert us
+                print(self.fsr_L)
+                #update previous input
+                if (self.fsr_L > 0):
+                    prev_input = self.fsr_L
+                    return prev_input 
+                #slight pause
+                count+=1
+                time.sleep(1)
+         #   return prev_input
+        #
+        except KeyboardInterrupt:
+            return -1
+            pass
+        #
+        finally:
+            #GPIO.cleanup()
+            return prev_input
+
 def main():
     fsr=FSR()
     fsr.check_wight()
 
 if __name__ == "__main__":
     main()
-"""
