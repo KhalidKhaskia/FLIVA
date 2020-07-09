@@ -56,7 +56,8 @@ public class SensorsLogHis extends AppCompatActivity
 								String temperature = document.getString("temperature");
 								String humidity = document.getString("humidity");
 								String sound = document.getString("sound");
-								SensorsLog senorLog = new SensorsLog(date,movement,seat,door,temperature,humidity,sound);
+								String location = document.getString("location");
+								SensorsLog senorLog = new SensorsLog(date,movement,seat,door,temperature,humidity,sound,location);
 								sensorsListLog.add(senorLog);
 							}
 							adapter.notifyDataSetChanged();
@@ -69,8 +70,8 @@ public class SensorsLogHis extends AppCompatActivity
 				});
 
 		// mog data
-		SensorsLog s1 = new SensorsLog("12/12/2015","1","2","3","4","5","3");
-		SensorsLog s2 = new SensorsLog("01/01/2020","1","2","3","4","5","3");
+		SensorsLog s1 = new SensorsLog("12/12/2015","1","2","3","4","5","3","25.12/15.2");
+		SensorsLog s2 = new SensorsLog("01/01/2020","1","2","3","4","5","3","25.55/15.111");
 		sensorsListLog.add(s1);
 		sensorsListLog.add(s2);
 

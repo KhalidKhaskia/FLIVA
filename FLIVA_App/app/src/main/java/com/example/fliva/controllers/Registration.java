@@ -73,10 +73,37 @@ public class Registration extends AppCompatActivity
                 final String license=D_license.getText().toString();
                 String email=D_email.getText().toString();
                 String password=D_password.getText().toString();
-
+                if(license.toString().isEmpty())
+                {
+                    D_license.setError("Please enter value");
+                }
                 if(license.toString().length()<6 || license.toString().length()>8)
                 {
                     D_license.setError("License number must be between 6 to 8 digits");
+                }
+                if(firstname.toString().isEmpty())
+                {
+                    D_Fname.setError("Please enter value");
+                }
+                if(lastname.toString().isEmpty())
+                {
+                    D_Lname.setError("Please enter value");
+                }
+                if(id.toString().isEmpty())
+                {
+                    D_id.setError("Please enter value");
+                }
+                if(phonenumber.toString().isEmpty())
+                {
+                    D_phone.setError("Please enter value");
+                }
+                if(email.toString().isEmpty())
+                {
+                    D_email.setError("Please enter value");
+                }
+                if(password.toString().isEmpty())
+                {
+                    D_password.setError("Please enter value");
                 }
 
                 final User user = new User(firstname,lastname,id,phonenumber,license,email,password);

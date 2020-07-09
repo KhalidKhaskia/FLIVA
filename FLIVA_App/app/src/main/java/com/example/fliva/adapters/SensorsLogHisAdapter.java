@@ -57,6 +57,7 @@ public class SensorsLogHisAdapter extends BaseAdapter
 		TextView  temperature= view.findViewById(R.id.txt_temperature);
 		TextView  humidity= view.findViewById(R.id.txt_humidity);
 		TextView  sounds= view.findViewById(R.id.txt_sound);
+		TextView  location= view.findViewById(R.id.txt_gps);
 
 		date.setText(sL.getDate());
 		movement.setText(sL.getMovment());
@@ -65,6 +66,7 @@ public class SensorsLogHisAdapter extends BaseAdapter
 		temperature.setText(sL.getTemperature());
 		humidity.setText(sL.getHumidity());
 		sounds.setText(sL.getSound());
+		location.setText(sL.getLocation());
 
 		return view;
 	}
