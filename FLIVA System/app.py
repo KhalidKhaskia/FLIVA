@@ -39,13 +39,5 @@ def postMethod2():
     res=jsonify(opj.SensorJson)
     return res
 
-@app.route('/sensor1/<flag>',methods=["POST"])  
-def postMethod3(flag=""):   
-    if flag == '1':   
-        # Code to control hardware
-        return "start sensor 1"   
-    else:    
-        return "fuck off"
-
 if __name__=='__main__':
-    app.run(debug=True ,host='192.168.68.102')
+    app.run(debug=True ,host='192.168.68.116')

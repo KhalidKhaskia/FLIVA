@@ -1,7 +1,7 @@
 import firebase_admin
 from firebase_admin import credentials, messaging
 
-cred = credentials.Certificate("/home/pi/Documents/Final_Project_FLIVA/backend/FLIVA/FLIVA System/Notifications/fliva-db-firebase-adminsdk-ws3ya-9c6b138dc3.json")
+cred = credentials.Certificate("/home/pi/Documents/Final_Project_FLIVA/backend/FLIVA/FLIVA System/Notifications/fliva-db-firebase-adminsdk-ws3ya-55b3574963.json")
 firebase_admin.initialize_app(cred)
 
 def sendPush(title, msg, registration_token, dataObject=None):

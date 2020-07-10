@@ -8,18 +8,16 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
 from firebase_admin import firestore
-import PushNotify as fcm
+import Notifications.PushNotify as fcm
+from datetime import date
 
 
 
 class Activate_Sensors:
-    
     SensorJson=[]
     Activation_DateTime=None
     
     def Activate(self):
-        
-        
         
         Activation_DateTime=time.strftime("%a %d-%m-%Y * %H:%M:%S")
         
@@ -38,18 +36,20 @@ class Activate_Sensors:
         pir=PIR()
         pir_res=pir.Detect_Motion()
         #pir_res=int(pir.motion) # pir sensor motion result
+        #pir_res = 111
         del pir
         
         mcsd=MCSD()
         door_sensor=mcsd.Check_Open_Doors() # result of open door
+        #door_sensor = 123
         del mcsd
         
         fsr=FSR()
         fsr_res=fsr.check_wight()
+        #fsr_res=1234
         del fsr
         
         # create json object of the sensors returned value 
-  
         self.SensorJson=[
                 {
                     "Name":"FSR",
@@ -89,49 +89,18 @@ def main():
     num_of_loops = 5 # run loop time  
     delay_in_sec = 2 # dealy each runable loop  
     
-    # Use the application default credentials
-    cred = credentials.Certificate('path/to/serviceAccount.json')
-    firebase_admin.initialize_app(cred)
-
-    
-    
+    # date today
+    today = date.today()
+    d1 = today.strftime("%Y%m%d")
     
     #firebase db connection
-    cred = credentials.Certificate("firebase.json")
+    cred = credentials.Certificate("/home/pi/Documents/Final_Project_FLIVA/backend/FLIVA/FLIVA System/Notifications/fliva-db-firebase-adminsdk-ws3ya-55b3574963.json")
     #firebase_admin.initialize_app(cred)
-    firebase_admin.initialize_app(cred)
-    db = firestore.client()
-    """
-    firebase_admin.initialize_app(cred,{'databaseURL':"https://flivaalert.firebaseio.com"})
-    ref = db.reference('/')
-    ref.set({
-    "sensorsVal1":{
-        "FSR":{
-            "Name":"FSR",
-            "Value":33
-        },
-        "PIR":{
-            "Name":"PIR",
-            "Value":2
-        },
-        "dhtT":{
-            "Name":"DHTtemperature",
-            "Value":3
-        },            
-        "dhtH":{
-            "Name":"DHThumidity",
-            "Value":4
-        },            
-        "mcsd":{
-            "Name":"MCSD",
-            "Value":5
-        }
-     }
-    })
-    """
-    exit(0)
+    
+    tokens = ["chUm2MF2-UM:APA91bF8kKdWy6S5yOtk1cDxjW9FwYqnDHqmrBorz6zfa5AI-GoWthO0AzX2EYdaq3lcEkFUtF-qHDIjHpmI1n439rKZ26efXNag7AKNr5OVb2vMHEliD2U0VW0Z_qt8dHiRmBOqSV8q"]
+    fcm.sendPush("Forgiten Life", "someone is stuck in your car", tokens)
+    
     while(True):
-
         driver_chiar = fsr_driver.check_driver_chair() # is the driver set on the chair
         car_doors_open = car_doors.Check_Open_Doors() # is the door open
         
@@ -157,33 +126,37 @@ def main():
             while (car_doors_open == 0):
                 time.sleep(1)
                 car_doors_open=car_doors.Check_Open_Doors()
-                # save log
+                #save log
                 sec_driver_outside+=1
                 print(123)
                 if(sec_driver_outside > 5):
                     break
             
-            activate_fliva() # that function that run the system of FLIVA
+            activate_fliva(fcm) # that function that run the system of FLIVA
         #save into data base logs
         break
      
     del fsr_driver    
     del car_doors
     
-def activate_fliva():
+def activate_fliva(fcm):
     print("activte fliva")
     # create an object of the sensors classes
     pir=PIR()
     fsr=FSR()
-    mcsd=MCSD()
-    
+    mcsd=MCSD() 
+    dht=DHT()
+    temparture_res=dht.Calculate_DHT()
+        
     tuple_results = () # tuple that will have the results of activating the fsr and the pir sensors
     list_results = [0,0]  # list that will contain the resault of calculating the result of the sensors withen each loop
     counter = 0 # let the scan run ttl-time to leave times (loops) to get (deook) 
-    ttl = 5 # time to leave the loop
+    ttl = 2 # time to leave the loop
+    time.sleep(3) # delay 2 sec to refresh the sensors 
     while(counter < ttl):
         #START
         door_sensor=mcsd.Check_Open_Doors() # result of open door
+       
         if (door_sensor > 0):
             exit()
         time.sleep(2) # delay 2 sec to refresh the sensors 
@@ -199,23 +172,42 @@ def activate_fliva():
         # list_results[2]+=mic_res
         counter+=1
         #END while
+        print("run")
+        
     tuple_results = tuple(list_results)
-    if((list_results[0] < ttl/2) or (list_results[1] < ttl/2)):
-        #save log
-        exit()
+    if((list_results[0] < ttl) or (list_results[1] < ttl)):
+        print("inside")
+        # date today
+        today = date.today()
+        d1 = today.strftime("%Y%m%d")
+        #cred = credentials.Certificate("/home/pi/Documents/Final_Project_FLIVA/backend/FLIVA/FLIVA System/fliva-db-firebase-adminsdk-ws3ya-8c78122a1a.json")
+        #firebase_admin.initialize_app(cred)
+        db = firestore.client()
+        doc_ref = db.collection(u'sensors').document(d1)
+        doc_ref.set({
+            u'door': door_sensor,
+            u'seat': list_results[0] ,
+            u'movement': list_results[1] ,
+            u'temperature': temparture_res[0],
+            u'humidity': temparture_res[1],
+            u'sound': u'xxx',
+            u'location': u'32.22,34.95',
+        })
+        #exit()
     print("done")
     #!!!!
     # make call
+    
     # send sms with gps location
     
     # car alert
     
     # app alert
     tokens = ["chUm2MF2-UM:APA91bF8kKdWy6S5yOtk1cDxjW9FwYqnDHqmrBorz6zfa5AI-GoWthO0AzX2EYdaq3lcEkFUtF-qHDIjHpmI1n439rKZ26efXNag7AKNr5OVb2vMHEliD2U0VW0Z_qt8dHiRmBOqSV8q"]
-    fcm.sendPush("Hi", "fucking idiot check the car", tokens)
+    fcm.sendPush("Forgiten Life", "someone is stuck in your car", tokens)
     
     # delete the objects
-    del pir,mcsd.fsr
+    del pir,mcsd,fsr,dht,fcm
 
 # calling main func
 if __name__ == "__main__":
