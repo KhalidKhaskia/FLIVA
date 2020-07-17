@@ -38,15 +38,34 @@ The Thermostat is a contact type electro-mechanical temperature sensor or switch
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+  ### System Architecture
+  
+  
+  ### hardware connections
+  
+  
+  ### FLIVA App
+  
 
 ## Built With
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
-
+  ### Hardware
+   * [Raspberry Pi 4](https://www.raspberrypi.org/documentation/) - The FLIVA tiny computer 
+   * [Arduino](https://www.raspberrypi.org/documentation/) - Arduino is an open-source hardware and software that used to run sensor with wireless conction
+   * [GSM 900A](https://wiki.eprolabs.com/index.php?title=SIM_900A_GSM_GPRS_Module) a sensor that used to send sms messeges to useres
+   * [GPS](https://www.u-blox.com/sites/default/files/products/documents/NEO-6_DataSheet_(GPS.G6-HW-09005).pdf) a sensor that used to get the location
+ 
+    
+  ### Software
+   * [Android Studio](https://developer.android.com/docs) - The development environment for Google's Android operating system 
+   * [Java](https://docs.oracle.com/javase/7/docs/api/) - used to develop the android app
+   * [Volley](https://developer.android.com/training/volley) - is an HTTP library that makes networking for Android apps easier
+   * [Python](https://docs.python.org/3/) - used to develop the FLIVA system
+   * [Flask](https://flask.palletsprojects.com/en/1.1.x/) - Flask is a web framework that handel a http request betwwen the RPI to the app
+   * [RPi.GPIO](https://pypi.org/project/RPi.GPIO/) - This package provides a class to control the GPIO on a Raspberry Pi.
+   * [Arduino](https://docs.python.org/3/) - used to develop the sensors the based on wireless connection
+   * [FireBase DB](https://firebase.google.com/docs) - the database of FLIVA
+ 
+      
 ## Authors
 
 * **Khalid Khaskia** .
