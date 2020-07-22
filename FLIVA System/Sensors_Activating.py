@@ -4,6 +4,8 @@ from Sensors.FSR_Sensor import FSR
 from Sensors.PIR_Sensor import PIR_Sensor as PIR
 from Sensors.MCSD_Sensor import MCSD
 from Sensors.DHT11_Sensor import DHT_Sensor as DHT
+from Sensors.Buzzer_Sensor import Buzz as alarm
+
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import db
@@ -35,40 +37,39 @@ class Activate_Sensors:
         #time.sleep(3)
         pir=PIR()
         pir_res=pir.Detect_Motion()
-        #pir_res=int(pir.motion) # pir sensor motion result
-        #pir_res = 111
+        pir_res=int(pir.motion) # pir sensor motion result
+        #pir_res = 1
         del pir
         
         mcsd=MCSD()
         door_sensor=mcsd.Check_Open_Doors() # result of open door
-        #door_sensor = 123
         del mcsd
         
         fsr=FSR()
         fsr_res=fsr.check_wight()
-        #fsr_res=1234
+        #fsr_res=1
         del fsr
         
         # create json object of the sensors returned value 
         self.SensorJson=[
                 {
-                    "Name":"FSR",
+                    "Name":"Motion Detection",
+                    "Value":pir_res
+                },
+                { 
+                    "Name":"Seats",
                     "Value":fsr_res
                 },
                 {
-                    "Name":"PIR",
-                    "Value":pir_res
-                },
-                {
-                    "Name":"DHTtemperature",
+                    "Name":"Temperature",
                     "Value":DHT_Temp
                 },            
                 {
-                    "Name":"DHThumidity",
+                    "Name":"Humidity",
                     "Value":DHT_Humid
                 },            
                 {
-                    "Name":"MCSD",
+                    "Name":"Open Doors",
                     "Value":door_sensor
                 }
             ]
@@ -182,32 +183,38 @@ def activate_fliva(fcm):
         d1 = today.strftime("%Y%m%d")
         #cred = credentials.Certificate("/home/pi/Documents/Final_Project_FLIVA/backend/FLIVA/FLIVA System/fliva-db-firebase-adminsdk-ws3ya-8c78122a1a.json")
         #firebase_admin.initialize_app(cred)
+        #gps_val=Sensors.gps_Sensor
         db = firestore.client()
         doc_ref = db.collection(u'sensors').document(d1)
         doc_ref.set({
-            u'door': door_sensor,
-            u'seat': list_results[0] ,
-            u'movement': list_results[1] ,
-            u'temperature': temparture_res[0],
-            u'humidity': temparture_res[1],
+            u'door': str(door_sensor),
+            u'seat': str(list_results[0]),
+            u'movement': str(list_results[1]),
+            u'temperature': str(temparture_res[0]),
+            u'humidity': str(temparture_res[1]),
             u'sound': u'xxx',
             u'location': u'32.22,34.95',
         })
         #exit()
     print("done")
     #!!!!
-    # make call
-    
-    # send sms with gps location
-    
-    # car alert
-    
-    # app alert
+    # app aler
     tokens = ["chUm2MF2-UM:APA91bF8kKdWy6S5yOtk1cDxjW9FwYqnDHqmrBorz6zfa5AI-GoWthO0AzX2EYdaq3lcEkFUtF-qHDIjHpmI1n439rKZ26efXNag7AKNr5OVb2vMHEliD2U0VW0Z_qt8dHiRmBOqSV8q"]
     fcm.sendPush("Forgiten Life", "someone is stuck in your car", tokens)
+    # make call
+    # under testing case the sensor has been broken
+    # send sms with gps location
+    # under testing case the sensor has been broken
+    # car alarm
+    alarm.set_freq(800)
+    alarm.start()
+    time.sleep(3)
+    alarm.set_lowToHigh()
+    time.sleep(3)
+    alarm.stop()
     
     # delete the objects
-    del pir,mcsd,fsr,dht,fcm
+    del pir,mcsd,fsr,dht,fcm,alarm
 
 # calling main func
 if __name__ == "__main__":
